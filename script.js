@@ -7,11 +7,13 @@ let generateNumber = function () {
   return Math.floor(Math.random() * (max_value - min_value) + min_value);
 };
 let random_num = generateNumber();
-let score = 5;
+let score = 20;
+let highscore = 0;
 
 let main_score_board = document.querySelector('.score');
-
 let btnCheck = document.querySelector('.check');
+let high_score = document.querySelector('.highscore');
+
 btnCheck.addEventListener('click', () => {
   const msg = document.querySelector('.message');
   let text = Number(document.querySelector('.guess').value);
@@ -22,6 +24,9 @@ btnCheck.addEventListener('click', () => {
 
   if (text === random_num) {
     msg.textContent = 'YOU WON';
+    if (score > highscore) {
+      high_score.textContent = score;
+    }
     document.body.style.backgroundColor = 'green';
   } else if (text > random_num) {
     msg.textContent = 'TOO HIGH!!!';
@@ -41,7 +46,7 @@ btnCheck.addEventListener('click', () => {
 
 let again_btn = document.querySelector('.again');
 again_btn.addEventListener('click', () => {
-  score = 5;
+  score = 20;
   random_num = generateNumber();
   document.body.style.backgroundColor = 'black';
   let text = (document.querySelector('.guess').value = '');
