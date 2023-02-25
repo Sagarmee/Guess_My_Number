@@ -1,5 +1,6 @@
 'use strict';
 
+//geneate number
 let generateNumber = function () {
   const min_value = 1;
   const max_value = 21;
@@ -7,33 +8,43 @@ let generateNumber = function () {
   return Math.floor(Math.random() * (max_value - min_value) + min_value);
 };
 let random_num = generateNumber();
+
+//asign the score and highscore
 let score = 20;
 let highscore = 0;
 
+const displyMsg = function (msg) {
+  document.querySelector('.message').textContent = msg;
+};
+
+//score board
 let main_score_board = document.querySelector('.score');
+//check btn
 let btnCheck = document.querySelector('.check');
+//high score board
 let high_score = document.querySelector('.highscore');
+//msg
+const msg = document.querySelector('.message');
+//input field
 
+//addevenlisterner
 btnCheck.addEventListener('click', () => {
-  const msg = document.querySelector('.message');
   let text = Number(document.querySelector('.guess').value);
-
   if (!text) {
-    msg.textContent = 'VALUE IS EMPTY';
-  }
-
-  if (text === random_num) {
-    msg.textContent = 'YOU WON';
+    displyMsg('VALUE IS EMPTY');
+  } else if (text === random_num) {
+    displyMsg('YOU WON');
     if (score > highscore) {
-      high_score.textContent = score;
+      highscore = score;
+      high_score.textContent = highscore;
     }
     document.body.style.backgroundColor = 'green';
   } else if (text > random_num) {
-    msg.textContent = 'TOO HIGH!!!';
+    displyMsg('TOO HIGH!!!');
     score--;
     main_score_board.textContent = score;
   } else {
-    msg.textContent = 'TOO LOW!!!';
+    displyMsg('TOO LOW!!!');
     score--;
     main_score_board.textContent = score;
   }
